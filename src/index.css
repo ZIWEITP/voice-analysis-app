@@ -4,33 +4,69 @@
 
 @layer base {
   body {
-    @apply bg-slate-900 text-white min-h-screen antialiased;
-
-    font-family: system-ui, -apple-system, sans-serif;
+    /* 🏮 全站同步紫微命盤的沉墨底色 (#0A0A0A) 與米金字體 (#B39D81) */
+    background-color: #0A0A0A;
+    color: #B39D81;
+    min-height: screen;
+    font-family: 'serif', 'Noto Serif TC', 'Georgia', sans-serif;
+    -webkit-font-smoothing: antialiased;
   }
 }
 
 @layer components {
-
+  /* 🏮 玄學宣紙質感卡片：捨棄透明玻璃，改用極深沉色塊搭配 var(--main-gold) 的 15% 微弱金絲邊框 */
   .glass-card {
-    @apply bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl shadow-xl;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    background-color: #111111;
+    border: 1px solid rgba(179, 157, 129, 0.15);
+    border-radius: 1rem; /* rounded-2xl */
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+    transition: all 0.5s ease;
   }
   
+  .glass-card:hover {
+    border-color: rgba(179, 157, 129, 0.4);
+  }
+  
+  /* 🏮 古典絹絲按鈕：全面剔除青紫科幻漸層，改用低調的暗金襯底與高亮米金文字 */
   .glass-button {
-    @apply px-6 py-3 rounded-full font-bold transition-all duration-300 
-           hover:scale-105 active:scale-95 
-           bg-gradient-to-r from-accent-cyan to-accent-purple 
-           text-white shadow-lg cursor-pointer;
+    padding: 0.875rem 1.5rem; /* px-6 py-3.5 */
+    border-radius: 0.75rem; /* rounded-xl */
+    font-weight: 500;
+    letter-spacing: 3px;
+    font-size: 0.75rem; /* text-xs */
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    background-color: rgba(179, 157, 129, 0.1);
+    color: #B39D81;
+    border: 1px solid rgba(179, 157, 129, 0.4);
+    cursor: pointer;
   }
 
-  .recording-pulse {
-    @apply relative animate-pulse-slow;
+  .glass-button:not(:disabled):hover {
+    background-color: #B39D81;
+    color: #0A0A0A;
+    box-shadow: 0 0 15px rgba(179, 157, 129, 0.2);
+  }
+
+  .glass-button:disabled {
+    background-color: #111111;
+    color: #444444;
+    border-color: rgba(68, 68, 68, 0.3);
+    cursor: not-allowed;
   }
 }
 
 @layer utilities {
+  /* 🏮 漸層文字修正：原本的藍紫改成東方五行感、高質感的純粹金絲漸層 */
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-accent-cyan to-accent-purple;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    background-image: linear-gradient(to right, #B39D81, #B5A478);
   }
+}
+
+/* 🏮 全站同步：命盤系統專屬的靜謐古典呼吸線動畫 */
+@keyframes globalBreathe {
+  0%, 100% { opacity: 0.15; width: 100px; }
+  50% { opacity: 0.6; width: 150px; }
 }
